@@ -3,9 +3,10 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class Event {
-	private String date;
+	private Date date;
 	private String time;
 	private URL url;
 	private String name;
@@ -15,7 +16,7 @@ public class Event {
 		
 	}
 
-	public Event(String date, String time, URL url, String name, String city, String country) {
+	public Event(Date date, String time, URL url, String name, String city, String country) {
 		super();
 		this.date = date;
 		this.time = time;
@@ -25,18 +26,15 @@ public class Event {
 		this.country = country;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 	public void setDate(String date) {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-		DateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");		
-		SimpleDateFormat timeformater= new SimpleDateFormat("HH:mm:ss");
-		Date fullDate;
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");		
+		//SimpleDateFormat timeformater= new SimpleDateFormat("HH:mm:ss");
 		try {
-			fullDate = ((Date)format.parse(date));	
-			this.time = timeformater.format(fullDate);		
-			this.date = dateFormatter.format(fullDate);
+			this.date = ((Date)format.parse(date));
+			//this.time = timeformater.format(this.date);			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -77,7 +75,7 @@ public class Event {
 
 	@Override
 	public String toString() {
-		return "Event [date=" + date + ", time=" + time + ", url=" + url
+		return "Event [date&time=" + date.toLocaleString() + ", url=" + url
 				+ ", name=" + name + ", city=" + city + ", country=" + country
 				+ "]";
 	}
